@@ -1,41 +1,48 @@
 {
   "name": "peertube-plugin-ebu",
-  "description": "PeerTube plugin EBU",
-  "version": "0.0.4",
+  "description": "Enables the addition of EBU metadata",
+  "version": "0.0.1",
   "author": "biowilli",
-  "bugs": "https://framagit.org/framasoft/peertube/peertube-plugin-ebu/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/biowilli/peertube-plugin-ebu.git"
+  },
+  "license": "AGPL-3.0",
+  "bugs": "https://github.com/biowilli/peertube-plugin-ebu/issues",
   "clientScripts": [
     {
-      "script": "dist/common-client-plugin.js",
+      "script": "client/video-watch-client-plugin.js",
       "scopes": [
-        "common"
+        "video-watch"
       ]
     }
   ],
-  "css": [
-    "assets/style.css"
-  ],
+  "css": [],
+  "devDependencies": {
+    "@peertube/peertube-types": "^5.1.0",
+    "@purtuga/esm-webpack-plugin": "^1.1.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
   "engine": {
-    "peertube": ">=1.3.0"
+    "peertube": ">=3.4.0"
   },
   "homepage": "https://fairkom.eu",
   "keywords": [
     "peertube",
     "plugin",
-    "fairkom"
+    "creative commons",
+    "cc",
+    "licenses",
+    "ebu"
   ],
   "library": "./main.js",
   "scripts": {
     "prepare": "npm run build",
-    "build": "node ./scripts/build.js"
+    "build": "webpack --mode=production"
   },
   "staticDirs": {
     "images": "public/images"
   },
-  "translations": {
-    "fr-FR": "./languages/fr.json"
-  },
-  "devDependencies": {
-    "esbuild": "^0.14.36"
-  }
+  "translations": {}
 }
