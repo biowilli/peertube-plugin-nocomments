@@ -1,0 +1,38 @@
+{
+  "title": {
+    "name": "title",
+    "label": "Title",
+    "descriptionHTML": "Title",
+    "type": "input",
+    "default": "",
+    "hidden": false,
+    "error": false
+  },
+  "alternativeTitle": {
+    "name": "alternativeTitle",
+    "label": "alternativeTitle",
+    "descriptionHTML": "alternativeTitle",
+    "type": "input",
+    "default": "",
+    "hidden": false,
+    "error": false
+  },
+  "dateModified": {
+    "name": "dateModified",
+    "label": "dateModified",
+    "descriptionHTML": "dateModified",
+    "type": "input",
+    "default": "",
+    "hidden": false,
+    "error": false
+  },
+  "note": {
+    "name": "note",
+    "label": "note",
+    "descriptionHTML": "note",
+    "type": "input-textarea",
+    "default": "",
+    "hidden": false,
+    "error": false
+  }
+}

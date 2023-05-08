@@ -4,8 +4,10 @@ This plugin for the PeerTube platform enables the addition of EBU metadata. The 
 
 ### EBU Metadata list added
 
-1. not yet
-2. (waiting to start testing)
+1. title
+2. alternativeTitle
+3. dateModified
+4. note
 
 ### How to use
 

@@ -1,74 +1,23 @@
-//Die Hooks werden verwendet, um die Videoansicht zu modifizieren.
 function register({ registerHook, peertubeHelpers }) {
-  const baseStaticUrl = peertubeHelpers.getBaseStaticRoute();
-
-  // verschiedenen Creative-Commons-Lizenzen
-  const CC_VIDEO_LICENCES = {
-    1: {
-      label: "CC BY 4.0",
-      image: baseStaticUrl + "/images/by.png",
-      href: "https://creativecommons.org/licenses/by/4.0/",
-    },
-    2: {
-      label: "CC BY-SA 4.0",
-      image: baseStaticUrl + "/images/by-sa.png",
-      href: "https://creativecommons.org/licenses/by-sa/4.0/",
-    },
-    3: {
-      label: "CC BY-ND 4.0",
-      image: baseStaticUrl + "/images/by-nd.png",
-      href: "https://creativecommons.org/licenses/by-nd/4.0/",
-    },
-    4: {
-      label: "CC BY-NC 4.0",
-      image: baseStaticUrl + "/images/by-nc.png",
-      href: "https://creativecommons.org/licenses/by-nc/4.0/",
-    },
-    5: {
-      label: "CC BY-NC-SA 4.0",
-      image: baseStaticUrl + "/images/by-nc-sa.png",
-      href: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
-    },
-    6: {
-      label: "CC BY-NC-ND 4.0",
-      image: baseStaticUrl + "/images/by-nc-nd.png",
-      href: "https://creativecommons.org/licenses/by-nc-nd/4.0/",
-    },
-    7: {
-      label: "CC0 1.0",
-      image: baseStaticUrl + "/images/cc-zero.png",
-      href: "https://creativecommons.org/publicdomain/zero/1.0/",
-    },
-    8: {
-      label: "Public Domain Mark 1.0",
-      image: baseStaticUrl + "/images/publicdomain.png",
-      href: "https://creativecommons.org/publicdomain/mark/1.0/",
-    },
-  };
-
-  // überprüft die videolicence und gibt dann das img und den link zurück
-  registerHook({
-    target: "filter:api.video-watch.video.get.result",
-    handler: (video) => {
-      if (video.licence.id >= 1 && video.licence.id <= 8) {
-        video.licence.image = CC_VIDEO_LICENCES[video.licence.id].image;
-        video.licence.href = CC_VIDEO_LICENCES[video.licence.id].href;
-      }
-      return video;
-    },
-  });
-
-  //  ändert die Anzeige des Video-Players wenn der Player ladet
   registerHook({
     target: "action:video-watch.player.loaded",
     handler: ({ videojs, video, playlist }) => {
-      {
-        // Match all nodes
+      // Match all nodes
+      console.log("update view");
+      console.log(video.pluginData);
 
-        // match multiple elements, defined to handle responsiveness
-        // see https://github.com/Chocobozzz/PeerTube/blob/33eb19e5199cc9fa4d73c6675c97508e3e072ef9/client/src/app/%2Bvideos/%2Bvideo-watch/video-watch.component.html#L55-L56
+      var data = video.pluginData;
+      Object.keys(data).forEach((key) => {
+        const value = data[key];
+        console.log(key, value);
+        createVideoInfo(key, value);
+      });
 
-        // Elemente auswählen
+      /*  // match multiple elements, defined to handle responsiveness
+        // siehe https://github.com/Chocobozzz/PeerTube/blob/33eb19e5199cc9fa4d73c6675c97508e3e072ef9/client/src/app/%2Bvideos/%2Bvideo-watch/video-watch.component.html#L55-L56
+
+        // Block zur Aktualisierung der Anzeige des Videos mit CC-Lizenz
+        // Auswahl von Elementen aus dem DOM, die aktualisiert werden sollen
         const video_info = document.querySelectorAll(".video-info");
         const video_info_name = document.querySelectorAll(".video-info-name");
         const video_info_date_views = document.querySelectorAll(
@@ -79,8 +28,7 @@ function register({ registerHook, peertubeHelpers }) {
           '[title="Account page"]'
         );
 
-        // Remove everything before setting for newly selected video
-
+        // Entfernen von Attributen und Elementen vor der Aktualisierung für das neu ausgewählte Video
         for (let element of video_info) {
           element.removeAttribute("xmlns:dct");
           element.removeAttribute("xmlns:cc");
@@ -102,6 +50,7 @@ function register({ registerHook, peertubeHelpers }) {
         if (video.licence.id >= 1 && video.licence.id <= 8) {
           // Insert licence buttonlink
 
+          // Erstellen der Lizenzschaltfläche und des Links
           const licence_span = document.createElement("span");
           licence_span.className = "cc-licence";
           licence_span.innerHTML = " • ";
@@ -117,12 +66,14 @@ function register({ registerHook, peertubeHelpers }) {
           licence_link.appendChild(licence_button);
           licence_span.appendChild(licence_link);
 
+          // Hinzufügen der Lizenzschaltfläche zur Anzeige des Videos
           for (let element of video_info_date_views) {
             element.insertAdjacentHTML("beforeend", licence_span.outerHTML);
           }
 
           // Set CC-REL metadata
 
+          // Setzen von Metadaten für das Video mit CC-Lizenz
           for (let element of video_info) {
             element.setAttribute("xmlns:dct", "http://purl.org/dc/terms/");
             element.setAttribute("xmlns:cc", "https://creativecommons.org/ns#");
@@ -132,8 +83,7 @@ function register({ registerHook, peertubeHelpers }) {
             element.setAttribute("property", "dct:title");
           }
 
-          // Attribution only for the 6 CC licenses, not the public domain marks (CC0 and PDM)
-
+          // Nur bei den sechs CC-Lizenzen Attribution hinzufügen, nicht bei CC0 und PDM
           if (video.licence.id <= 6) {
             if (account_page_link) {
               account_page_link.firstElementChild.setAttribute(
@@ -148,10 +98,27 @@ function register({ registerHook, peertubeHelpers }) {
               account_page_link.setAttribute("href", account_page_link.href);
             }
           }
-        }
-      }
+        } */
     },
   });
+}
+
+function createVideoInfo(label, value) {
+  // Wähle das Element aus, zu dem du das neue Feld hinzufügen möchtest
+  const myVideoAttributes = document.querySelector("my-video-attributes");
+
+  // Erstelle das neue Feld
+  const newField = document.createElement("div");
+  newField.classList.add("attribute-ebu");
+
+  // Füge den Inhalt des neuen Feldes hinzu
+  newField.innerHTML = `
+<span class="attribute-label-ebu">${label}</span>
+<span class="attribute-value-ebu">${value}</span>
+`;
+
+  // Füge das neue Feld am Ende des my-video-attributes-Elements hinzu
+  myVideoAttributes.appendChild(newField);
 }
 
 export { register };
