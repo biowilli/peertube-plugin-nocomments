@@ -29,67 +29,8 @@ async function register({
     // If the setting is private, only server-side hooks can access it
     private: false,
   }); */
-  var ebuData = [
-    "title",
-    "alternativeTitle",
-    "dateModified",
-    "publicationHistory",
-    "note",
-    "alternativeTitle2",
-    "creator",
-    "contributor",
-    "description",
-    "subject",
-    "duration",
-    "identifier",
-    "identifier2",
-    "publisher",
-    "date",
-    "dateIssued",
-    "dateDigitised",
-    "publicationHistory2",
-    "dateModified2",
-    "coverage",
-    "coverage2",
-    "entity",
-    "entity2",
-    "type",
-    "type2",
-    "type3",
-    "part",
-    "part2",
-    "part3",
-    "language",
-    "source",
-    "version",
-    "relation",
-    "rights",
-    "rightsCoverage",
-    "rightsCoverage2",
-    "rightsCoverage3",
-    "dateModified3",
-    "metadataProvider",
-    "format",
-    "format",
-    "format2",
-    "format3",
-    "format4",
-    "format5",
-    "format6",
-    "format7",
-    "format8",
-    "format9",
-    "format10",
-    "format11",
-    "format12",
-    "format13",
-    "language2",
-    "format14",
-    "format15",
-    "rating",
-  ];
 
-  // Store data associated to this video
+  //disable comments when the video wants to be shown
   registerHook({
     target: "action:api.video.updated",
     handler: ({ video, body }) => {
@@ -103,34 +44,13 @@ async function register({
     },
   });
 
-  // Add your custom value to the video, so the client autofill your field using the previously stored value
+  //disable comments when the video wants to be shown
   registerHook({
     target: "filter:api.video.get.result",
     handler: async (video) => {
       if (!video) return video;
-      if (!video.pluginData) video.pluginData = {};
 
-      const promises = ebuData.map(async (ebuField) => {
-        var storedData = await storageManager.getData(
-          ebuField + "-" + video.id
-        );
-
-        if (ebuField == "title") {
-          video.pluginData[ebuField] = video.dataValues.name;
-          return;
-        }
-
-        video.pluginData[ebuField] = storedData;
-      });
-
-      await Promise.all(promises);
-
-      const sortedPluginData = {};
-      ebuData.forEach((ebuField) => {
-        sortedPluginData[ebuField] = video.pluginData[ebuField];
-      });
-
-      video.pluginData = sortedPluginData;
+      video.commentsEnabled = false;
       return video;
     },
   });

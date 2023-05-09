@@ -1,14 +1,14 @@
 {
-  "name": "peertube-plugin-ebu",
-  "description": "Enables the addition of EBU metadata",
-  "version": "0.1.20",
+  "name": "peertube-plugin-nocomments",
+  "description": "switch off comments on the instance",
+  "version": "0.0.20",
   "author": "biowilli",
   "repository": {
     "type": "git",
-    "url": "https://github.com/biowilli/peertube-plugin-ebu.git"
+    "url": "https://github.com/biowilli/peertube-plugin-nocomments.git"
   },
   "license": "AGPL-3.0",
-  "bugs": "https://github.com/biowilli/peertube-plugin-ebu/issues",
+  "bugs": "https://github.com/biowilli/peertube-plugin-nocomments/issues",
   "clientScripts": [
     {
       "script": "client/common-client-plugin.js",
@@ -39,15 +39,12 @@
   "keywords": [
     "peertube",
     "plugin",
-    "creative commons",
-    "cc",
-    "licenses",
-    "ebu",
-    "metadata",
-    "fairkom",
-    "broadcast",
-    "videodata",
-    "data"
+    "comments",
+    "nocomments",
+    "disable",
+    "comment",
+    "commentsection",
+    "fairkom"
   ],
   "library": "./main.js",
   "scripts": {
@@ -55,8 +52,6 @@
     "build": "webpack --mode=production"
   },
   "staticDirs": {
-    "images": "public/images",
-    "ebudata": "ebudata"
   },
   "translations": {}
 }
