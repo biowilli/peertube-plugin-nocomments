@@ -8,3 +8,11 @@ nocomments! It's simple this plugin disables and hides the comment section
 - Go to Plugin/Themes in the Administration section
 - Search plugins for 'nocomments'
 - Click on Install
+
+### npm package
+
+https://www.npmjs.com/package/peertube-plugin-nocomments
+
+### contributor
+
+https://www.fairkom.eu/
