@@ -1,6 +1,6 @@
 # PeerTube plugin nocomments
 
-nocomments! It's simple with this plugin disables and hides the comment section
+nocomments! It's simple this plugin disables and hides the comment section
 
 ### How to use nocomments
 
