@@ -1,7 +1,7 @@
 {
   "name": "peertube-plugin-nocomments",
   "description": "Switch off comments on the instance",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "biowilli",
   "repository": {
     "type": "git",
