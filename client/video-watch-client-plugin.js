@@ -1,9 +1,10 @@
-function register({ registerHook, peertubeHelpers }) {
+function register({ registerHook }) {
+  // Remove the "my-video-comments" element when the video player has loaded
   registerHook({
     target: "action:video-watch.player.loaded",
-    handler: ({ videojs, video, playlist }) => {
-      console.log("commentsEnabled:");
-      console.log(video.commentsEnabled);
+    handler: () => {
+      const myVideoComments = document.querySelector("my-video-comments");
+      myVideoComments.remove();
     },
   });
 }

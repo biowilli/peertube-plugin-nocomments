@@ -1,7 +1,7 @@
 {
   "name": "peertube-plugin-nocomments",
-  "description": "switch off comments on the instance",
-  "version": "0.0.20",
+  "description": "Switch off comments on the instance",
+  "version": "1.0.0",
   "author": "biowilli",
   "repository": {
     "type": "git",
@@ -11,21 +11,13 @@
   "bugs": "https://github.com/biowilli/peertube-plugin-nocomments/issues",
   "clientScripts": [
     {
-      "script": "client/common-client-plugin.js",
-      "scopes": [
-        "common"
-      ]
-    },
-    {
       "script": "client/video-watch-client-plugin.js",
       "scopes": [
         "video-watch"
       ]
     }
   ],
-  "css": [
-    "assets/style.css"
-  ],
+  "css": [],
   "devDependencies": {
     "@peertube/peertube-types": "^5.1.0",
     "@purtuga/esm-webpack-plugin": "^1.1.1",
@@ -37,6 +29,7 @@
   },
   "homepage": "https://fairkom.eu",
   "keywords": [
+    "peertube-plugin-nocomments",
     "peertube",
     "plugin",
     "comments",
@@ -51,7 +44,6 @@
     "prepare": "npm run build",
     "build": "webpack --mode=production"
   },
-  "staticDirs": {
-  },
+  "staticDirs": {},
   "translations": {}
 }
