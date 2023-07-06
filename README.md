@@ -1,6 +1,7 @@
 # PeerTube plugin nocomments
 
-nocomments! It's simple this plugin disables and hides the comment section
+This code is a PeerTube plugin called "nocomments" that disables and hides the comment section on PeerTube instances.
+It achieves this by removing the "my-video-comments" element from the video player when it has finished loading and setting the `commentsEnabled` property of videos to `false` when they are updated or retrieved.
 
 ### How to use nocomments
 
